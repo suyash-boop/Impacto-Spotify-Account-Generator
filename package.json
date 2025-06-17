@@ -1,0 +1,32 @@
+{
+	"name": "your-project-name",
+	"version": "0.1.0",
+	"description": "Spotify account generator + follower by Atlantis",
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.esm.js",
+	"type": "module",
+	"scripts": {
+		"clean": "rimraf dist",
+		"build": "npm run clean && npm run build:prod",
+		"dev": "jiti src/index.ts",
+		"start": "node dist/index.cjs.js",
+		"prebuild": "npm run clean",
+		"postbuild": "npm run scripts:postbuild",
+		"scripts:postbuild": "node ./scripts/postbuild.js"
+	},
+	"dependencies": {
+		"@cemalgnlts/mailjs": "^3.1.0",
+		"@clack/prompts": "^0.10.1",
+		"chalk": "^5.4.1",
+		"node-machine-id": "^1.1.12",
+		"open": "^10.1.1",
+		"puppeteer": "^24.10.0",
+		"puppeteer-extra": "^3.3.6"
+	},
+	"devDependencies": {
+		"@types/node": "^22.15.3",
+		"jiti": "^2.4.2",
+		"rimraf": "^6.0.1",
+		"tsup": "^8.4.0"
+	}
+}
