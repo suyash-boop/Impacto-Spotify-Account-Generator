@@ -1,0 +1,58 @@
+{
+    "compilerOptions": {
+      /* Core Options */
+      "target": "ES2020",                      /* Specify ECMAScript target version: 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ESNext' */
+      "module": "ESNext",                     /* Specify module code generation: 'CommonJS', 'ESNext', etc. */
+      "moduleResolution": "node",             /* Use Node.js module resolution strategy */
+      "lib": [
+        "ES2020",                               /* Include standard library definitions */
+        "DOM"                                   /* Needed for Puppeteer page/browser types */
+      ],
+  
+      /* Language and Environment */
+      "allowSyntheticDefaultImports": true,    /* Allow default imports from modules with no default export. */
+      "esModuleInterop": true,                 /* Emit __importStar and __importDefault helpers for compatibility. */
+      "resolveJsonModule": true,               /* Include modules imported with .json extension */
+  
+      /* Strict Type-Checking Options */
+      "strict": true,                          /* Enable all strict type-checking options */
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "strictBindCallApply": true,
+      "strictPropertyInitialization": true,
+      "noImplicitThis": true,
+      "alwaysStrict": true,
+  
+      /* Additional Checks */
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true,
+      "forceConsistentCasingInFileNames": true,
+  
+      /* Source and Declaration Files */
+      "sourceMap": true,                       /* Generates corresponding .map files */
+      "declaration": true,                     /* Generates .d.ts files */
+      "declarationMap": true,                  /* Generates sourcemaps for declarations */
+  
+      /* Output Directory */
+      "outDir": "dist",
+  
+      /* Base URL & Path Mapping */
+      "baseUrl": "./",
+      "paths": {
+        "@/*": ["src/*"],
+        "@/constants": ["src/constants/index.ts"],
+        "@/types": ["src/types/*"]                
+      }
+    },
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "node_modules",
+      "dist",
+      "**/*.spec.ts"
+    ]
+  }
+  
