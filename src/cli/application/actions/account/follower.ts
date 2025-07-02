@@ -5,6 +5,7 @@ import { totalLines } from "../../../../utils/functions/totalLines";
 import path from "path";
 import fs from "fs/promises";
 import puppeteer from "puppeteer";
+import { getOTP } from "../../../../services/getOTP";
 
 export async function accountFollower(profileLink: string) {
   new Banner({ x: "center", y: "top" }).setMeta(META);
@@ -54,6 +55,7 @@ export async function accountFollower(profileLink: string) {
 
     const emailcred = creds[0];
     const passwordcred = creds[1];
+    const emailpass = creds[2];
 
     console.log(chalk.cyanBright("Launching Browser..."));
     const browser = await puppeteer.launch({ headless: false });
@@ -71,8 +73,37 @@ export async function accountFollower(profileLink: string) {
       await page.waitForSelector(SELECTORS.emailContinue);
       await page.click(SELECTORS.emailContinue);
     })
+    await new Promise((res) => setTimeout(res, 10000));
+    const OTP = await getOTP( emailcred, emailpass );
 
-    
+    const OTPsplitted = OTP.toString().split("")
+
+    console.log(OTPsplitted);
+    console.log(chalk.blue("Filling OTP"));
+
+    for(let j = 0; j < 6; j++){
+      await page.waitForSelector(SELECTORS.OTP_BOX_SELECTORS[j]);
+      await page.type(SELECTORS.OTP_BOX_SELECTORS[j], OTPsplitted[j]);
+    }
+
+    setTimeout(async () => {
+      await page.waitForSelector(SELECTORS.loginBtn);
+      await page.click(SELECTORS.loginBtn);
+    }, 2000);
+
+    const pageFollow =  await browser.newPage();
+    await pageFollow.goto(profileLink);
+
+    setTimeout(async () => {
+      await pageFollow.waitForSelector(SELECTORS.followButton);
+      await pageFollow.click(SELECTORS.followButton);
+      console.log(chalk.green("Followed the profile successfully!"));
+    }, 5000);
+
+    await new Promise((res) => setTimeout(res, 2000));
+
+    console.log(chalk.green("Closing the browser..."));
+    await browser.close();
 
   }
 }
